@@ -17,7 +17,7 @@ if (isset($_POST['save'])) {
         $stmt->execute();
         $stmt->close();
 
-        header("Location: index.php");
+        header("Location: index.php?msg=created");
         exit();
     }
 }
@@ -25,22 +25,36 @@ if (isset($_POST['save'])) {
 include_once "includes/header.php";
 ?>
 
-<h3>Add Student</h3>
-<?php if (!empty($message)): ?>
-    <p style="color:red;"><?= displayValue($message); ?></p>
-<?php endif; ?>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Add Student</h4>
+            </div>
+            <div class="card-body">
+                <?php if (!empty($message)): ?>
+                    <div class="alert alert-danger"><?= displayValue($message); ?></div>
+                <?php endif; ?>
 
-<form action="create.php" method="POST">
-    <label>Name:</label><br>
-    <input type="text" name="name"><br><br>
-    
-    <label>Email:</label><br>
-    <input type="email" name="email"><br><br>
-    
-    <label>Course:</label><br>
-    <input type="text" name="course"><br><br>
-    
-    <button type="submit" name="save">Save</button>
-</form>
-</body>
-</html>
+                <form action="create.php" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Name:</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email:</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Course:</label>
+                        <input type="text" name="course" class="form-control">
+                    </div>
+                    <button type="submit" name="save" class="btn btn-primary">Save Student</button>
+                    <a href="index.php" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include_once "includes/footer.php"; ?>
